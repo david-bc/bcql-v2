@@ -3,7 +3,7 @@ export default {
     columns: [
       { label: 'Name', key: 'docName', tooltip: '' },
       { label: 'Email', key: 'email', tooltip: '' },
-      // { label: 'Application', key: 'providers', tooltip: '' },
+      { label: 'Permissions', key: 'permissions', tooltip: '' },
       { label: 'Type', key: 'assetType', tooltip: '' },
     ]
   },

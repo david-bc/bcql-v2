@@ -25,12 +25,13 @@ const aceStyles = {
     return _.assignIn({
       width: '100%',
       border: '1px solid #ccc',
-      marginBottom: '0.5em'
+      marginBottom: '0.5em',
+      height: "100%"
     },
     fullSize ? aceStyles.large : aceStyles.small)
   },
-  small: { height: '3em', width: '100%' },
-  large: { height: '13em', width: '100%' }
+  small: { height: '3em', width: '87%' },
+  large: { height: '13em', width: '87%' }
 }
 
 const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
@@ -40,6 +41,9 @@ const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
         <Switch onChange={e => setFullSize(e.target.checked)} checked={fullSize}>
           Large Editor
         </Switch>
+        <div style={{ float: 'right' }}>
+          <Button primary raised disabled={false}><i className="fa fa-search fa-spin"></i> search</Button>
+        </div>
       </div>
       <div>
         <AceEditor
@@ -51,10 +55,9 @@ const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
           editorProps={{$blockScrolling: true}}
           enableBasicAutocompletion={true}
         />
+
       </div>
-      <div style={{ textAlign: 'right' }}>
-        <Button primary raised disabled={false}>JUN SUCKS</Button>
-      </div>
+
     </div>
   );
 }
