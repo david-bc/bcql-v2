@@ -21,7 +21,7 @@ const App = ({}) => {
     <div className="App">
       <div style={{ height: '100vh', position: 'relative' }}>
         <Layout fixedHeader fixedDrawer style={{ backgroundColor: '#FFF'}}>
-          <Header title="TODO: pull from redux" />
+          <Header title="bettercloud query language" />
           <Drawer title={(<LeftNavTitle />)} style={{ width:'250px'}}>
             <Navigation>
               <NavLink to="/users" className="myNavLink">Users</NavLink>

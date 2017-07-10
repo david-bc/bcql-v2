@@ -45,7 +45,7 @@ background-color:rgb(21,35,45);
 
 .LeftNavTitle{
 color: rgb(136,163,182)!important;
-
+margin-left:-35px;
 }
 
 span.mdl-layout-title{
