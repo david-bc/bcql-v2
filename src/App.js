@@ -10,7 +10,7 @@ import GridPage from './components/GridPage'
 const LeftNavTitle = ({}) => {
   return (
     <div className="LeftNavTitle">
-      BcQL<img src="/img/logo.png" alt=""/>
+      BcQL<img src="/img/icon-48.png" alt=""/>
     </div>
   );
 }
