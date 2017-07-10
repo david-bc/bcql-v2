@@ -39,10 +39,10 @@ const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
     <div className="AdvancedSearchForm">
       <div>
         <Switch onChange={e => setFullSize(e.target.checked)} checked={fullSize}>
-          Large Editor
+          Expand Editor
         </Switch>
         <div style={{ float: 'right' }}>
-          <Button primary raised disabled={false}><i className="fa fa-search fa-spin"></i> search</Button>
+          <Button primary raised disabled={false}><i className="fa fa-search fa-spin"></i> ¯\_(ツ)_/¯</Button>
         </div>
       </div>
       <div>
