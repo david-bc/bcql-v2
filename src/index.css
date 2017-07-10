@@ -55,14 +55,9 @@ span.mdl-layout-title{
 
 
 }
-.mdl-layout-title{
+.mdl-layout__drawer .mdl-layout-title{
 background-color: rgb(30,58,79)
 }
-
-.LeftNavTitle{
-  background-color: white;
-}
-
 
 h2{
 
