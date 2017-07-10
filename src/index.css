@@ -92,3 +92,11 @@ h2{
 background-color: rgb(0,125,167)!important;
 
 }
+
+.mdl-navigation__link.active{
+  background-color:rgb(30,58,79);
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link.myNavLink:hover{
+  background-color:rgb(30,58,79);
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom'
+import { Switch, Route, NavLink, Link } from 'react-router-dom'
 
 import {
   Layout, Header, Textfield, Drawer, Navigation, Content
@@ -10,7 +10,7 @@ import GridPage from './components/GridPage'
 const LeftNavTitle = ({}) => {
   return (
     <div className="LeftNavTitle">
-      <img src="/img/header-logo.png" alt=""/>
+      <Link to="/"><img src="/img/header-logo.png" alt=""/></Link>
     </div>
   );
 }
@@ -24,16 +24,19 @@ const App = ({}) => {
           <Header title="TODO: pull from redux" />
           <Drawer title={(<LeftNavTitle />)} style={{ width:'250px'}}>
             <Navigation>
-              <NavLink to="/users">Users</NavLink>
-              <NavLink to="/users">Groups</NavLink>
-              <NavLink to="/users">Assets</NavLink>
-              <NavLink to="/users">Audit Logs</NavLink>
+              <NavLink to="/users" className="myNavLink">Users</NavLink>
+              <NavLink to="/groups" className="myNavLink">Groups</NavLink>
+              <NavLink to="/assets" className="myNavLink">Assets</NavLink>
+              <NavLink to="/auditlogs" className="myNavLink">Audit Logs</NavLink>
             </Navigation>
           </Drawer>
           <Content>
             <Switch>
               <Route exact path="/" component={ComingSoon} />
               <Route path="/users" component={GridPage} />
+              <Route path="/groups" component={GridPage} />
+              <Route path="/assets" component={GridPage} />
+              <Route path="/auditlogs" component={GridPage} />
               <Route component={ComingSoon} />
             </Switch>
           </Content>
