@@ -3,12 +3,22 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { withState, compose } from 'recompose';
 
-import AceEditor from 'react-ace';
-
-import 'brace/mode/mysql';
-import 'brace/theme/github';
-
 import { Button, Switch } from 'react-mdl';
+import AceEditor from 'react-ace';
+import ace from 'brace'
+
+import '../ace/bcql_mode';
+import 'brace/theme/github';
+import 'brace/ext/language_tools'
+const langTools = ace.acequire('ace/ext/language_tools');
+
+var customCompleter = {
+  getCompletions: (editor, session, pos, prefix, callback) => {
+    console.log({ editor, session, pos, prefix, callback });
+    return callback(null, [{name: 'Testing', value: 'testing', score: 1, meta: 'meta???'}]);
+  }
+}
+langTools.addCompleter(customCompleter);
 
 const aceStyles = {
   get(fullSize) {
@@ -23,7 +33,7 @@ const aceStyles = {
   large: { height: '13em', width: '100%' }
 }
 
-const AdvancedSearchForm = ({ fullSize, setFullSize }) => {
+const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
   return (
     <div className="AdvancedSearchForm">
       <div>
@@ -33,9 +43,10 @@ const AdvancedSearchForm = ({ fullSize, setFullSize }) => {
       </div>
       <div>
         <AceEditor
-          mode="mysql"
+          mode="bcql"
           theme="github"
-          onChange={console.log}
+          value={query}
+          onChange={val => setQuery(val)}
           style={ aceStyles.get(fullSize) }
           editorProps={{$blockScrolling: true}}
           enableBasicAutocompletion={true}

@@ -13,7 +13,6 @@ const GridPage = ({ match }) => {
   const config = Configurations[collection];
   const columns = config.grid.columns;
   const rows = Service[collection].fetchAll().data;
-  console.log({ config, columns, rows });
   return (
     <div className="GridPage">
       <ContentWrapper>
@@ -29,10 +28,9 @@ const GridPage = ({ match }) => {
           {columns.map((col, i) => (
             <TableHeader
               name={col.key}
-              // tooltip={col.tooltip}
+              tooltip={col.tooltip}
               key={i}
             >
-              {console.log(col)}
               {col.label}
             </TableHeader>
           ))}
