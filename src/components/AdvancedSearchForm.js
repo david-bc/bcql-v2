@@ -53,7 +53,7 @@ const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
         />
       </div>
       <div style={{ textAlign: 'right' }}>
-        <Button primary raised disabled={false}>Seach</Button>
+        <Button primary raised disabled={false}>JUN SUCKS</Button>
       </div>
     </div>
   );
