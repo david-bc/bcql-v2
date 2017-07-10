@@ -59,6 +59,24 @@ span.mdl-layout-title{
 background-color: rgb(30,58,79)
 }
 
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link{
+  height: 36px;
+  width: 218px;
+  border-radius: 0;
+  color: #88a3b6;
+  font-weight: 600;
+  font-size: 12px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0 16px!important;
+  width: 100%;
+  white-space: normal;
+  line-height: 36px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  font-family: Open Sans,sans-serif!important;
+}
+
 h2{
 
   display: block;

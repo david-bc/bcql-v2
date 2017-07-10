@@ -22,7 +22,7 @@ const App = ({}) => {
       <div style={{ height: '100vh', position: 'relative' }}>
         <Layout fixedHeader fixedDrawer style={{ backgroundColor: '#FFF'}}>
           <Header title="TODO: pull from redux" />
-          <Drawer title={(<LeftNavTitle />)}>
+          <Drawer title={(<LeftNavTitle />)} style={{ width:'250px'}}>
             <Navigation>
               <NavLink to="/"><i className="fa fa-home"></i> Home</NavLink>
               <NavLink to="/users"><i className="fa fa-users"> </i> Users</NavLink>
