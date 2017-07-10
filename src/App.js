@@ -10,7 +10,7 @@ import GridPage from './components/GridPage'
 const LeftNavTitle = ({}) => {
   return (
     <div className="LeftNavTitle">
-      BcQL<img src="/img/logo.png" alt=""/>
+      <img src="/img/header-logo.png" alt=""/>
     </div>
   );
 }
@@ -24,8 +24,7 @@ const App = ({}) => {
           <Header title="TODO: pull from redux" />
           <Drawer title={(<LeftNavTitle />)} style={{ width:'250px'}}>
             <Navigation>
-              <NavLink to="/"><i className="fa fa-home"></i> Home</NavLink>
-              <NavLink to="/users"><i className="fa fa-users"> </i> Users</NavLink>
+              <NavLink to="/users">Users</NavLink>
               <NavLink to="/users">Groups</NavLink>
               <NavLink to="/users">Assets</NavLink>
               <NavLink to="/users">Audit Logs</NavLink>
