@@ -1,52 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom'
+import Configurations from '../config/index'
+import Service from '../service'
 
-import { Table, TableHeader, Button } from 'react-mdl';
+import { Table, TableHeader } from 'react-mdl';
 import ContentWrapper from './ContentWrapper';
 import AdvancedSearchForm from './AdvancedSearchForm'
 
 const GridPage = ({ match }) => {
-  const rows = [
-      {material: 'Acrylic (Transparent)', quantity: 25, price: 2.90},
-      {material: 'Plywood (Birch)', quantity: 50, price: 1.25},
-      {material: 'Laminate (Gold on Blue)', quantity: 10, price: 2.35}
-  ];
   const collection = match.path.substring(1);
-  console.log({collection});
+  const config = Configurations[collection];
+  const columns = config.grid.columns;
+  const rows = Service[collection].fetchAll().data;
+  console.log({ config, columns, rows });
   return (
     <div className="GridPage">
       <ContentWrapper>
-        <AdvancedSearchForm />
-        <Button primary raised disabled={false}>Seach</Button>
+        <div style={{ marginBottom: '1em' }}>
+          <AdvancedSearchForm />
+        </div>
         <Table
           // sortable
           shadow={0}
           rows={rows}
           style={{ width: "100%" }}
         >
-          <TableHeader
-            name="material"
-            sortFn={(a, b, isAsc) => (isAsc ? a : b).match(/\((.*)\)/)[1].localeCompare((isAsc ? b : a).match(/\((.*)\)/)[1])}
-            tooltip="The amazing material name"
-          >
-            Material
-          </TableHeader>
-          <TableHeader
-            numeric
-            name="quantity"
-            tooltip="Number of materials"
-          >
-            Quantity
-          </TableHeader>
-          <TableHeader
-            numeric
-            name="price"
-            cellFormatter={(price) => `\$${price.toFixed(2)}`}
-            tooltip="Price pet unit"
-          >
-            Price
-          </TableHeader>
+          {columns.map((col, i) => (
+            <TableHeader
+              name={col.key}
+              // tooltip={col.tooltip}
+              key={i}
+            >
+              {console.log(col)}
+              {col.label}
+            </TableHeader>
+          ))}
         </Table>
       </ContentWrapper>
     </div>
