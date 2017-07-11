@@ -42,7 +42,7 @@ const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
           Expand Editor
         </Switch>
         <div style={{ float: 'right' }}>
-          <Button primary raised disabled={false}><i className="fa fa-search fa-spin"></i> ¯\_(ツ)_/¯</Button>
+          <Button primary raised disabled={false}><i className="fa fa-search fa-spin"></i> SEARCH</Button>
         </div>
       </div>
       <div>
