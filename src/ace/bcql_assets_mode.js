@@ -58,7 +58,7 @@ ace.define('ace/mode/bcql_assets_highlight_rules', ['require', 'exports', 'modul
   let TextHighlightRules = acequire('./text_highlight_rules').TextHighlightRules;
 
   let EikelangHighlightRules = function() {
-    let builtins = 'AND|OR|Filename|Type|Exposure';
+    let builtins = 'AND|OR';
 
     let keywordMapper = this.createKeywordMapper({
       'support.function': builtins
