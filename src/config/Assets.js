@@ -1,10 +1,10 @@
 export default {
   grid: {
     columns: [
-      { label: 'Name', key: 'docName', tooltip: '' },
+      { label: 'Name', key: 'title', tooltip: '' },
       { label: 'Email', key: 'email', tooltip: '' },
-      { label: 'Permissions', key: 'permissions', tooltip: '' },
-      { label: 'Type', key: 'assetType', tooltip: '' },
+      { label: 'Permissions', key: 'permission', tooltip: '' },
+      { label: 'Type', key: 'mimeType', tooltip: '' },
     ]
   },
   bcql: {

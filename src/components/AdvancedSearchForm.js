@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { withState, compose } from 'recompose';
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import { Button, Switch } from 'react-mdl';
 import AceEditor from 'react-ace';
@@ -16,9 +17,11 @@ import 'brace/theme/github';
 import 'brace/ext/language_tools'
 const langTools = ace.acequire('ace/ext/language_tools');
 
+let currContextSlug = 'assets';
+
 var customCompleter = {
   getCompletions: (editor, session, pos, prefix, callback) => {
-    console.log({ editor, session, pos, prefix, callback });
+    console.log({ currContextSlug });
   //  return callback(null, [{name: 'Testing', value: 'testing', score: 1, meta: 'meta???'}]);
   }
 }
@@ -38,8 +41,9 @@ const aceStyles = {
   large: { height: '13em', width: '87%' }
 }
 
-let AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery, match }) => {
+let AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery, match, submitSearch }) => {
   const collection = match.path.substring(1)
+  currContextSlug = collection;
   const mode = "bcql_" + collection
   return (
     <div className="AdvancedSearchForm">
@@ -48,7 +52,9 @@ let AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery, match }) => 
           Expand Editor
         </Switch>
         <div style={{ float: 'right' }}>
-          <Button primary raised disabled={false}><i className="fa fa-search fa-spin"></i> SEARCH</Button>
+          <Button primary raised disabled={false} onClick={() => submitSearch(query, collection)}>
+            <i className="fa fa-search fa-spin"></i> SEARCH
+          </Button>
         </div>
       </div>
       <div>
@@ -73,6 +79,15 @@ AdvancedSearchForm.propTypes = {};
 AdvancedSearchForm = compose(
  withState('fullSize', 'setFullSize', false),
  withState('query', 'setQuery', '')
+)(AdvancedSearchForm);
+
+AdvancedSearchForm = connect(
+  state => ({}),
+  dispatch => ({
+    submitSearch: (rawQuery, contextSlug) => {
+      dispatch({ type: 'SEARCH_FETCH_REQUESTED', rawQuery, contextSlug });
+    }
+  })
 )(AdvancedSearchForm);
 
 export default withRouter(AdvancedSearchForm)
