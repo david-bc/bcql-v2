@@ -23,7 +23,7 @@ let currTypeAheadContext = []
 
 var customCompleter = {
   getCompletions: (editor, session, pos, prefix, callback) => {
-    const taVals = currTypeAheadContext.map(f => ({ name: f, value: f }));
+    const taVals = currTypeAheadContext.map(({ display, tooltip }) => ({ name: display, value: display, meta: tooltip }));
    return callback(null, taVals);
   }
 }

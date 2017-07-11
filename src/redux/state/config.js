@@ -9,7 +9,11 @@ export function selectGridColumns(state, contextSlug) {
 }
 
 export function selectBcqlTypeAhead(state, contextSlug) {
-  return _.defaultTo(state.config[contextSlug], { bcql: { fields: [] }}).bcql.fields.map(field => field.display);
+  return _.defaultTo(state.config[contextSlug], { bcql: { fields: [] }})
+      .bcql.fields.map(field => ({
+        display: field.display,
+        tooltip: field.tooltip
+      }));
 }
 
 const defaultState = {
