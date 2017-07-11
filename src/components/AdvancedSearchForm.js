@@ -2,12 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { withState, compose } from 'recompose';
+import { withRouter } from 'react-router-dom'
 
 import { Button, Switch } from 'react-mdl';
 import AceEditor from 'react-ace';
 import ace from 'brace'
 
-import '../ace/bcql_mode';
+import '../ace/bcql_users_mode';
+import '../ace/bcql_assets_mode';
+import '../ace/bcql_groups_mode';
+import '../ace/bcql_auditlogs_mode';
 import 'brace/theme/github';
 import 'brace/ext/language_tools'
 const langTools = ace.acequire('ace/ext/language_tools');
@@ -15,7 +19,7 @@ const langTools = ace.acequire('ace/ext/language_tools');
 var customCompleter = {
   getCompletions: (editor, session, pos, prefix, callback) => {
     console.log({ editor, session, pos, prefix, callback });
-    return callback(null, [{name: 'Testing', value: 'testing', score: 1, meta: 'meta???'}]);
+  //  return callback(null, [{name: 'Testing', value: 'testing', score: 1, meta: 'meta???'}]);
   }
 }
 langTools.addCompleter(customCompleter);
@@ -34,7 +38,9 @@ const aceStyles = {
   large: { height: '13em', width: '87%' }
 }
 
-const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
+let AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery, match }) => {
+  const collection = match.path.substring(1)
+  const mode = "bcql_" + collection
   return (
     <div className="AdvancedSearchForm">
       <div>
@@ -47,7 +53,7 @@ const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
       </div>
       <div>
         <AceEditor
-          mode="bcql"
+          mode={mode}
           theme="github"
           value={query}
           onChange={val => setQuery(val)}
@@ -64,7 +70,9 @@ const AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery }) => {
 
 AdvancedSearchForm.propTypes = {};
 
-export default compose(
+AdvancedSearchForm = compose(
  withState('fullSize', 'setFullSize', false),
  withState('query', 'setQuery', '')
 )(AdvancedSearchForm);
+
+export default withRouter(AdvancedSearchForm)

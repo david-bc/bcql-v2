@@ -51,14 +51,14 @@ ace.define('ace/mode/doc_comment_highlight_rules',
     exports.DocCommentHighlightRules = DocCommentHighlightRules;
   });
 
-ace.define('ace/mode/bcql_highlight_rules', ['require', 'exports', 'module', 'ace/lib/oop', 'ace/lib/lang', 'ace/mode/doc_comment_highlight_rules', 'ace/mode/text_highlight_rules'], function(acequire, exports, module) {
+ace.define('ace/mode/bcql_auditlogs_highlight_rules', ['require', 'exports', 'module', 'ace/lib/oop', 'ace/lib/lang', 'ace/mode/doc_comment_highlight_rules', 'ace/mode/text_highlight_rules'], function(acequire, exports, module) {
   let oop = acequire('../lib/oop');
   let lang = acequire('../lib/lang');
   let DocCommentHighlightRules = acequire('./doc_comment_highlight_rules').DocCommentHighlightRules;
   let TextHighlightRules = acequire('./text_highlight_rules').TextHighlightRules;
 
   let EikelangHighlightRules = function() {
-    let builtins = 'Users|Firstname|Assets|Filename|Groups|Name';
+    let builtins = 'AND|OR|Actor|Connector|Status|Event|Time';
 
     let keywordMapper = this.createKeywordMapper({
       'support.function': builtins
@@ -133,11 +133,11 @@ ace.define('ace/mode/bcql_highlight_rules', ['require', 'exports', 'module', 'ac
   exports.EikelangHighlightRules = EikelangHighlightRules;
 });
 
-ace.define('ace/mode/bcql', ['require', 'exports', 'module', 'ace/lib/oop', 'ace/mode/text', 'ace/mode/bcql_highlight_rules'],
+ace.define('ace/mode/bcql_auditlogs', ['require', 'exports', 'module', 'ace/lib/oop', 'ace/mode/text', 'ace/mode/bcql_auditlogs_highlight_rules'],
   function(acequire, exports, module) {
     let oop = acequire('../lib/oop');
     let TextMode = acequire('../mode/text').Mode;
-    let EikelangHighlightRules = acequire('./bcql_highlight_rules').EikelangHighlightRules;
+    let EikelangHighlightRules = acequire('./bcql_auditlogs_highlight_rules').EikelangHighlightRules;
 
     let Mode = function() {
       this.HighlightRules = EikelangHighlightRules;
@@ -149,7 +149,7 @@ ace.define('ace/mode/bcql', ['require', 'exports', 'module', 'ace/lib/oop', 'ace
       this.lineCommentStart = ['--', '#']; // todo space
       this.blockComment = {start: '/*', end: '*/'};
 
-      this.$id = 'ace/mode/bcql';
+      this.$id = 'ace/mode/bcql_auditlogs';
     }).call(Mode.prototype);
 
     exports.Mode = Mode;

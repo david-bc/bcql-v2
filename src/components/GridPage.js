@@ -22,6 +22,7 @@ let GridPage = ({ match }) => {
         <div style={{ marginBottom: '1em' }}>
           <AdvancedSearchForm />
         </div>
+
         <Table
           // sortable
           shadow={0}
