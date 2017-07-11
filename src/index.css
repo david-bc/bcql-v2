@@ -100,3 +100,8 @@ background-color: rgb(0,125,167)!important;
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link.myNavLink:hover{
   background-color:rgb(30,58,79);
 }
+
+._elevio_launcher{
+  display:none;
+  width:30px;
+}
