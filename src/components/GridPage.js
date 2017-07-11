@@ -7,14 +7,15 @@ import { connect } from 'react-redux'
 import Configurations from '../config/index'
 import Service from '../service'
 import { selectData } from '../redux/state/data'
+import { selectGridColumns } from '../redux/state/config'
 
 import { Table, TableHeader } from 'react-mdl';
 import ContentWrapper from './ContentWrapper';
 import AdvancedSearchForm from './AdvancedSearchForm'
 import SomethingWentWrong from './SomethingWentWrong'
 
-let GridPage = ({ match, columns, rows }) => {
-  const collection = match.path.substring(1);
+let GridPage = ({ columns, rows, cols }) => {
+  console.log({ rows, cols });
   return (
     <div className="GridPage">
       <ContentWrapper>
@@ -28,7 +29,7 @@ let GridPage = ({ match, columns, rows }) => {
           rows={rows}
           style={{ width: "100%" }}
         >
-          {columns.map((col, i) => (
+          {cols.map((col, i) => (
             <TableHeader
               name={col.key}
               tooltip={col.tooltip}
@@ -45,9 +46,9 @@ let GridPage = ({ match, columns, rows }) => {
 
 GridPage = connect(
   (state, props) => {
-    console.log({ state, props, slice: selectData(state, props.collection) });
     return {
-      rows: selectData(state, props.collection).data
+      rows: selectData(state, props.collection).data,
+      cols: selectGridColumns(state, props.collection),
     }
   }
 )(GridPage)

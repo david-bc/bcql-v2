@@ -20,6 +20,7 @@ ReactDOM.render(
 registerServiceWorker();
 
 store.dispatch({ type: 'SEARCH_FETCH_REQUESTED', rawQuery: '', contextSlug: 'assets' });
+store.dispatch({ type: 'CONFIGS_FETCH_REQUESTED' });
 // store.dispatch({ type: 'SEARCH_FETCH_REQUESTED', rawQuery: '', contextSlug: 'audit' });
 // store.dispatch({ type: 'SEARCH_FETCH_REQUESTED', rawQuery: '', contextSlug: 'assets' });
 // store.dispatch({ type: 'SEARCH_FETCH_REQUESTED', rawQuery: '', contextSlug: 'users' });

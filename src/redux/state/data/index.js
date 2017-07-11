@@ -34,8 +34,6 @@ const defaultState = {
   },
 };
 
-console.log({ defaultState });
-
 export default (state = defaultState, action) => {
   switch (action.type) {
 
@@ -53,7 +51,6 @@ export default (state = defaultState, action) => {
           data,
         }
       })
-      console.log({ action, state });
       break;
     }
 

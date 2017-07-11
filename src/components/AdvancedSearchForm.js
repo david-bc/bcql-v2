@@ -18,11 +18,16 @@ import 'brace/ext/language_tools'
 const langTools = ace.acequire('ace/ext/language_tools');
 
 let currContextSlug = 'assets';
+let currTypeAheadContext = []
 
 var customCompleter = {
   getCompletions: (editor, session, pos, prefix, callback) => {
     console.log({ currContextSlug });
-  //  return callback(null, [{name: 'Testing', value: 'testing', score: 1, meta: 'meta???'}]);
+   return callback(null, [
+     {name: 'Title', value: 'Title', score: 1, meta: 'The filename'},
+     {name: 'Owner', value: 'Owner', score: 1, meta: 'The file owner'},
+     {name: 'Filetype', value: 'Filetype', score: 1, meta: 'The file extension'}
+   ]);
   }
 }
 langTools.addCompleter(customCompleter);
