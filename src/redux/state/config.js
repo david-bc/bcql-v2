@@ -8,6 +8,10 @@ export function selectGridColumns(state, contextSlug) {
   return _.defaultTo(state.config[contextSlug], { grid: { columns: [] }}).grid.columns;
 }
 
+export function selectBcqlTypeAhead(state, contextSlug) {
+  return _.defaultTo(state.config[contextSlug], { bcql: { fields: [] }}).bcql.fields.map(field => field.display);
+}
+
 const defaultState = {
   assets: {
     grid: { columns: [] },

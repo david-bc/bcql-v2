@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { withState, compose } from 'recompose';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { selectBcqlTypeAhead } from '../redux/state/config'
 
 import { Button, Switch } from 'react-mdl';
 import AceEditor from 'react-ace';
@@ -22,12 +23,8 @@ let currTypeAheadContext = []
 
 var customCompleter = {
   getCompletions: (editor, session, pos, prefix, callback) => {
-    console.log({ currContextSlug });
-   return callback(null, [
-     {name: 'Title', value: 'Title', score: 1, meta: 'The filename'},
-     {name: 'Owner', value: 'Owner', score: 1, meta: 'The file owner'},
-     {name: 'Filetype', value: 'Filetype', score: 1, meta: 'The file extension'}
-   ]);
+    const taVals = currTypeAheadContext.map(f => ({ name: f, value: f }));
+   return callback(null, taVals);
   }
 }
 langTools.addCompleter(customCompleter);
@@ -46,8 +43,7 @@ const aceStyles = {
   large: { height: '13em', width: '87%' }
 }
 
-let AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery, match, submitSearch }) => {
-  const collection = match.path.substring(1)
+let AdvancedSearchForm = ({ fullSize, setFullSize, query, setQuery, collection, submitSearch }) => {
   currContextSlug = collection;
   const mode = "bcql_" + collection
   return (
@@ -87,7 +83,11 @@ AdvancedSearchForm = compose(
 )(AdvancedSearchForm);
 
 AdvancedSearchForm = connect(
-  state => ({}),
+  (state, props) => {
+    const collection = props.match.path.substring(1);
+    currTypeAheadContext = selectBcqlTypeAhead(state, collection);
+    return { collection };
+  },
   dispatch => ({
     submitSearch: (rawQuery, contextSlug) => {
       dispatch({ type: 'SEARCH_FETCH_REQUESTED', rawQuery, contextSlug });
