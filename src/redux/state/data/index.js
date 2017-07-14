@@ -5,6 +5,9 @@ import GroupsDummyResponse from '../../../service/GroupsDummyResponse'
 import UsersDummyResponse from '../../../service/UsersDummyResponse'
 
 export function selectData(state, contextSlug) {
+  if (_.isNil(contextSlug)) {
+    return _.values(state.data);
+  }
   const { count, data } = _.defaultTo(state.data[contextSlug], { count: -1, data: [] });
   return { count, data };
 }

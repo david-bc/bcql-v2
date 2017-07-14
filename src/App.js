@@ -6,6 +6,8 @@ import {
 } from 'react-mdl'
 import ComingSoon from './components/ComingSoon'
 import GridPage from './components/GridPage'
+import ProxyConfigList from './components/settings/ProxyConfigList'
+import ProxyConfigForm from './components/settings/ProxyConfigForm'
 
 const LeftNavTitle = ({}) => {
   return (
@@ -28,6 +30,8 @@ const App = ({}) => {
               <NavLink to="/groups" className="myNavLink">Groups</NavLink>
               <NavLink to="/assets" className="myNavLink">Assets</NavLink>
               <NavLink to="/auditlogs" className="myNavLink">Audit Logs</NavLink>
+              <hr/>
+              <NavLink to="/settings" className="myNavLink">Settings</NavLink>
             </Navigation>
           </Drawer>
           <Content>
@@ -37,6 +41,8 @@ const App = ({}) => {
               <Route path="/groups" component={GridPage} />
               <Route path="/assets" component={GridPage} />
               <Route path="/auditlogs" component={GridPage} />
+              <Route exact path="/settings" component={ProxyConfigList} />
+              <Route exact path="/settings/:contextClass" component={ProxyConfigForm} />
               <Route component={ComingSoon} />
             </Switch>
           </Content>

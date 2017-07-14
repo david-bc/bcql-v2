@@ -116,3 +116,7 @@ background-color: rgb(0,125,167)!important;
   ackground-size:cover;
   background-blend-mode:multiply
 }
+
+.form-group {
+  margin: 1em 0;
+}

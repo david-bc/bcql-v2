@@ -16,6 +16,18 @@ export function selectBcqlTypeAhead(state, contextSlug) {
       }));
 }
 
+export function selectBcqlConfig(state, contextSlug) {
+  return _.defaultTo(state.config[contextSlug], { bcql: { fields: [] }}).bcql;
+}
+
+export function selectConfigs(state) {
+  return _.values(state.config);
+}
+
+export function selectConfig(state, contextSlug) {
+  return _.defaultTo(state.config[contextSlug], { bcql: { fields: [] }});
+}
+
 const defaultState = {
   assets: {
     grid: { columns: [] },

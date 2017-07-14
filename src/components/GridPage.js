@@ -2,25 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom'
-import { withProps, branch, renderComponent, compose } from 'recompose'
+import { withState, withProps, branch, renderComponent, compose } from 'recompose'
 import { connect } from 'react-redux'
 import Configurations from '../config/index'
 import Service from '../service'
 import { selectData } from '../redux/state/data'
 import { selectGridColumns } from '../redux/state/config'
 
-import { Table, TableHeader } from 'react-mdl';
+import { Table, TableHeader, Switch } from 'react-mdl';
 import ContentWrapper from './ContentWrapper';
 import AdvancedSearchForm from './AdvancedSearchForm'
+import SimpleSeachForm from './SimpleSeachForm'
 import SomethingWentWrong from './SomethingWentWrong'
 
-let GridPage = ({ columns, rows, cols }) => {
-  console.log({ rows, cols });
+let GridPage = ({ columns, rows, cols, advanced, setAdvanced }) => {
+
   return (
     <div className="GridPage">
       <ContentWrapper>
+        <div className="advanced-switch-row">
+          <Switch checked={advanced} onChange={e => setAdvanced(e.target.checked)}>
+            Advanced
+          </Switch>
+        </div>
         <div style={{ marginBottom: '1em' }}>
-          <AdvancedSearchForm />
+          {advanced
+            ? (<AdvancedSearchForm />)
+            : (<SimpleSeachForm />)
+          }
         </div>
 
         <Table
@@ -54,6 +63,7 @@ GridPage = connect(
 )(GridPage)
 
 GridPage = compose(
+  withState('advanced', 'setAdvanced', false),
   withProps(props => {
     const match = props.match;
     const collection = match.path.substring(1);

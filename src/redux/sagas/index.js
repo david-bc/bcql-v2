@@ -4,22 +4,25 @@ import axios from 'axios';
 
 const contextSlugMap = {
   assets: 'BCAsset',
-  users: 'BCUser',
+  auditlogs: 'BCAuditLog',
 }
 
 const reverseContextSlugMap = {
   BCAsset: 'assets',
-  BCUser: 'users',
+  BCAuditLog: 'auditlogs',
 }
+
+const apiBaseUrl = 'http://localhost:8080';
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* fetchResults(action) {
   const { rawQuery, contextSlug } = action;
+  const contextClass = contextSlugMap[contextSlug];
 
-  if (contextSlug !== 'assets') return;
+  if (_.isNil(contextClass)) return;
 
   try {
-      const results = yield call(axios.post, 'http://10.10.5.233:8080/api/v1/search', { rawQuery, contextClass: contextSlugMap[contextSlug] });
+      const results = yield call(axios.post, `${apiBaseUrl}/api/v1/search`, { rawQuery, contextClass });
       const resultsData = results.data;
       const { count, data } = resultsData;
       yield put({type: "SEARCH_FETCH_SUCCEEDED", count, data, contextSlug });
@@ -30,7 +33,7 @@ function* fetchResults(action) {
 
 function* fetchConfigs(action) {
   try {
-      const results = yield call(axios.get, 'http://10.10.5.233:8080/api/v1/configs');
+      const results = yield call(axios.get, `${apiBaseUrl}/api/v1/configs`);
       const data = {};
       _.keys(results.data).forEach(key => data[reverseContextSlugMap[key]] = results.data[key]);
       yield put({type: "CONFIGS_FETCH_SUCCEEDED", data });
